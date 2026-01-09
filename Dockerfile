@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsm6 \
     libxext6 \
     && rm -rf /var/lib/apt/lists/*
-    # rm -rf limpia la caché de apt para reducir el peso de la imagen final
+# rm -rf limpia la caché de apt para reducir el peso de la imagen final
 
 # 3. Directorio de Trabajo
 # Establecemos /app como el directorio raíz dentro del contenedor
@@ -26,13 +26,9 @@ WORKDIR /app
 COPY backend/requirements.txt /app/backend/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/backend/requirements.txt
 
-# 5. Copia del Código Fuente y Modelos
-# Convertimos el root del contenedor en una réplica del root del proyecto
+# 5. Copia del Código Fuente del Backend
+# Solo copiamos el backend (los modelos y PDFs están en .gitignore)
 COPY backend /app/backend
-COPY psycho_model_final /app/psycho_model_final
-COPY knowledge_base /app/knowledge_base
-# Opcional: Copiar la base de datos vectorial pre-calculada
-COPY chroma_db /app/chroma_db
 
 # 6. Exponer Puerto
 # Render esperará tráfico en el puerto definido por la variable PORT (por defecto suele ser 10000 o 8000)
