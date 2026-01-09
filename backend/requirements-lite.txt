@@ -14,6 +14,9 @@ bcrypt==5.0.0
 # Database
 sqlalchemy==2.0.45
 
+# Email Validation
+email-validator==2.3.0
+
 # LangChain (Gemini API)
 langchain==1.2.3
 langchain-core==1.2.6
