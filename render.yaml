@@ -7,7 +7,7 @@ services:
     region: frankfurt # u Ohio, según preferencia
     plan: free # Plan gratuito
     branch: main
-    repo: https://github.com/tu-usuario/oncologIA # Render lo detectará auto, esto es referencia
+    repo: https://github.com/toloporto/OncologIA # Render lo detectará auto, esto es referencia
 
     # Variables de Entorno (Secrets)
     envVars:
