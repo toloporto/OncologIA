@@ -163,8 +163,8 @@ app = FastAPI(
 async def startup_event():
     """Se ejecuta al iniciar el servidor. Pre-carga el modelo de IA."""
     logger.info("🚀 Iniciando servicios de OncologIA...")
-    # Pre-cargar el modelo de IA para que esté listo desde el primer segundo
-    model_manager.load_nlp_model()
+    # CLOUD: Modelo local deshabilitado (no está en repo)
+    # model_manager.load_nlp_model()
 
 # CORS
 app.add_middleware(
