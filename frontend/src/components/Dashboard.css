@@ -1,0 +1,279 @@
+/* Dashboard specific styles - Premium Redesign */
+
+.dashboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* --- Stats Row --- */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    box-shadow: var(--shadow-premium);
+    border: 1px solid var(--border-soft);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-light);
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-icon-wrapper {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+}
+
+.stat-icon-wrapper.users { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); color: #0d9488; }
+.stat-icon-wrapper.sessions { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); color: #3b82f6; }
+.stat-icon-wrapper.alerts { background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%); color: #ef4444; }
+
+.stat-change {
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-radius: 99px;
+}
+
+.stat-change.positive { background-color: #f0fdf4; color: #16a34a; }
+
+.stat-label-alert {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: #ef4444;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.stat-value {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.04em;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.stat-value.warning { 
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* --- Main Grid --- */
+.dashboard-main-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2.5rem;
+}
+
+.card-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.card-header-flex h3 { 
+    margin: 0; 
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.mini-btn {
+    padding: 0.6rem 1.2rem !important;
+    font-size: 0.9rem !important;
+}
+
+/* --- Quick Actions --- */
+.quick-action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.action-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 1.2rem;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.action-item:hover {
+    border-color: var(--primary-light);
+    background-color: #f8fafc;
+    transform: translateX(10px);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.05);
+}
+
+.action-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.action-icon.brain { background: #f5f3ff; color: #8b5cf6; }
+.action-icon.patients { background: #eff6ff; color: #3b82f6; }
+
+.action-info h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.action-info p {
+    margin: 6px 0 0 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.chevron { color: #cbd5e1; transition: all 0.3s; }
+.action-item:hover .chevron { 
+    color: var(--primary);
+    transform: translateX(4px);
+}
+
+/* --- Activity Feed --- */
+.activity-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.feed-item {
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+
+.feed-indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-top: 8px;
+    flex-shrink: 0;
+    border: 3px solid white;
+    z-index: 1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.feed-indicator.análisis { background-color: #8b5cf6; }
+.feed-indicator.registro { background-color: #3b82f6; }
+.feed-indicator.seguridad { background-color: #ef4444; }
+
+.feed-content {
+    flex: 1;
+    background: rgba(248, 250, 252, 0.5);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    padding: 1.2rem 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-soft);
+    transition: all 0.3s ease;
+}
+
+.feed-item:hover .feed-content {
+    background: white;
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.stat-card {
+    animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.stat-card:nth-child(2) { animation-delay: 0.1s; }
+.stat-card:nth-child(3) { animation-delay: 0.2s; }
+
+.feed-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.feed-type {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.feed-time {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.feed-desc {
+    margin: 8px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-main);
+}
+
+.feed-status {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 99px;
+    font-weight: 700;
+}
+
+.feed-status.completado { background: #d1fae5; color: #065f46; }
+.feed-status.éxito { background: #dbeafe; color: #1e40af; }
+.feed-status.revisado { background: #fee2e2; color: #991b1b; }
+
+@media (max-width: 1400px) {
+    .dashboard-main-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,94 @@
+{
+  "resourceType": "Bundle",
+  "id": "5e441aac-4c81-414a-ad83-69476d632b84",
+  "type": "transaction",
+  "timestamp": "2026-01-08T14:25:57.234215Z",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-123",
+        "name": [
+          {
+            "text": "Juan Pérez",
+            "family": "Pérez"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1955-05-20"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-123"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "873eac17-6030-42c7-a055-975e7125a468",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "C34.9",
+              "display": "Neoplasia maligna de bronquios o del pulmón, parte no especificada"
+            }
+          ],
+          "text": "Neoplasia maligna de bronquios o del pulmón, parte no especificada"
+        },
+        "subject": {
+          "reference": "Patient/patient-123"
+        },
+        "recordedDate": "2026-01-08T14:25:57.229245Z"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "d7c5c09e-ceeb-43a5-b0f6-7fed6417cce3",
+        "status": "active",
+        "intent": "order",
+        "medication": {
+          "concept": {
+            "coding": [
+              {
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "code": "7052",
+                "display": "Morfina oral 10mg"
+              }
+            ],
+            "text": "Morfina oral 10mg"
+          }
+        },
+        "subject": {
+          "reference": "Patient/patient-123"
+        },
+        "authoredOn": "2026-01-08T14:25:57.233703Z"
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest"
+      }
+    }
+  ]
+}

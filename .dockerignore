@@ -1,0 +1,21 @@
+# Ignorar carpetas de dependencias locales (Docker las instala dentro)
+venv/
+node_modules/
+.git/
+.idea/
+.vscode/
+
+# Ignorar caches de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar archivos de logs y bases de datos locales
+*.log
+*.sqlite
+*.db
+
+# Ignorar archivos de sistema
+.DS_Store
+Thumbs.db

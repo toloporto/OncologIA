@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # Backend API con FastAPI y modelos ML
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: orthoweb3-backend
+    ports:
+      - "8004:8000"
+    environment:
+      - PORT=8000
+      - HOST=0.0.0.0
+      # Asegurar que la DB se guarde en /app/data/ortho.db ajustando la env var
+      - DATABASE_URL=sqlite:////app/data/ortho.db
+    volumes:
+      # Persistir datos en el directorio local data/
+      - ./data:/app/data
+      # Mapear public_images para persistencia de archivos de pacientes
+      - ./public_images:/app/public_images
+      # Inyectar el archivo .env real
+      - ./backend/.env:/app/.env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend React con Vite + nginx
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: orthoweb3-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    environment:
+      # La URL del backend será accesible en http://backend:8000 desde dentro de la red Docker
+      # Pero desde el navegador del usuario, será http://localhost:8004
+      - VITE_API_URL=http://localhost:8004
+
+  # Opcional: Nodo IPFS local para almacenamiento descentralizado
+  # Descomenta si quieres usar IPFS localmente
+  # ipfs:
+  #   image: ipfs/kubo:latest
+  #   container_name: orthoweb3-ipfs
+  #   ports:
+  #     - "5001:5001"  # API
+  #     - "8080:8080"  # Gateway
+  #   volumes:
+  #     - ipfs-data:/data/ipfs
+  #   restart: unless-stopped
+
+# Volúmenes opcionales
+# volumes:
+#   ipfs-data:

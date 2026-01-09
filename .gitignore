@@ -1,0 +1,40 @@
+venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+build/
+.env
+.env.local
+
+# Databases & Storage
+chroma_db/
+knowledge_base/
+*.db
+*.sqlite3
+*.pkl
+dataset_psycho_ready.jsonl
+psycho_model_final/
+psycho_model_results/
+
+# Logs & System
+*.log
+.tmp*/
+.tmp.drivedownload/
+.tmp.driveupload/
+
+# Frontend (Safe defaults)
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/coverage/
+
+# IDE & OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+

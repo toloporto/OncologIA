@@ -1,0 +1,48 @@
+/* frontend/src/components/AnalysisDisplay.css */
+
+.analysis-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.image-display {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background-color: #1a1a1a; /* Fondo oscuro por si la imagen tarda en cargar */
+}
+
+.image-display img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.segmentation-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Para poder interactuar con la imagen si fuera necesario */
+}
+
+.segmentation-polygon {
+  fill: rgba(255, 0, 0, 0.4); /* Relleno rojo semi-transparente */
+  stroke: rgba(255, 255, 255, 0.8); /* Borde blanco */
+  stroke-width: 2;
+}
+
+/* El .result-panel ya tiene estilos en App.css, pero podemos añadir especificidad si es necesario */
+.result-panel {
+    background-color: var(--background-secondary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}

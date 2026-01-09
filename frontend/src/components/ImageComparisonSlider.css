@@ -1,0 +1,116 @@
+.comparison-slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* Aumentado de 600px a 800px */
+  height: 550px; /* Aumentado de 400px a 550px */
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  cursor: col-resize;
+  user-select: none;
+  background-color: #f0f0f0;
+}
+
+.img-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.before-image img {
+  width: 100%;
+  width: 800px; /* Actualizado de 600px a 800px */
+  max-width: none;
+}
+
+.comparison-slider-container .before-image {
+  z-index: 2;
+  border-right: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.comparison-slider-container .before-image img {
+  width: 100%;
+  width: 800px; /* Actualizado de 600px a 800px */
+  height: 100%;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 800px) {
+  .comparison-slider-container {
+    height: 400px; /* Reducido en móvil */
+  }
+  .comparison-slider-container .before-image img {
+    width: 100vw;
+    max-width: calc(100vw - 40px);
+  }
+}
+
+.label {
+  position: absolute;
+  top: 20px;
+  padding: 4px 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+}
+
+.label-before {
+  left: 20px;
+}
+
+.label-after {
+  right: 20px;
+}
+
+.slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: white;
+  cursor: col-resize;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: translateX(-50%); /* Centrar el handle */
+}
+
+.handle-circle {
+  width: 40px;
+  height: 40px;
+  background: #2563eb; /* Color primario */
+  border: 3px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s ease;
+}
+
+.slider-handle:hover .handle-circle {
+  transform: scale(1.1);
+}
+
+.slider-handle:active .handle-circle {
+  transform: scale(0.95);
+  background: #1d4ed8;
+}

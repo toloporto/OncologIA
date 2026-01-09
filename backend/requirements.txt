@@ -1,0 +1,36 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+python-multipart
+email-validator
+# Auth (Critical)
+bcrypt
+passlib[bcrypt]
+python-jose[cryptography]
+# NLP & AI
+transformers
+torch
+pysentimiento
+accelerate
+# LangChain & Agents
+langchain
+langchain-core
+langchain-google-genai
+langchain-community
+langgraph
+# Image Processing
+Pillow
+numpy
+# Utilities
+python-dotenv
+requests
+google-genai
+# Production Server
+gunicorn
+# Voice Analysis
+openai-whisper
+# Clinical RAG (Brain)
+chromadb
+pypdf
+sentence-transformers

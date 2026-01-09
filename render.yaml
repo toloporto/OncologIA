@@ -1,0 +1,34 @@
+services:
+  # 1. Backend Service (Web Service)
+  - type: web
+    name: oncologIA-backend
+    env: python
+    runtime: docker
+    region: frankfurt # u Ohio, según preferencia
+    plan: free # Plan gratuito
+    branch: main
+    repo: https://github.com/tu-usuario/oncologIA # Render lo detectará auto, esto es referencia
+
+    # Variables de Entorno (Secrets)
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./psico.db # Ojo: SQLite en Docker se reinicia con cada deploy. Para persistencia real usa Render Disk o Postgres.
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: PORT
+        value: 8000
+
+  # 2. Frontend Service (Static Site)
+  - type: static
+    name: oncologIA-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: oncologIA-backend
+          property: url
