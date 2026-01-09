@@ -364,16 +364,15 @@ def analyze_session(
     try:
         emotions = langchain_agent.extract_symptoms_agent(input_data.text)
         
-        # INTEGRACIÓN ML PÚBLICO: Complementar con detección de emociones del modelo entrenado
-        try:
-            from backend.services.emotion_ml_service import emotion_ml_service
-            ml_prediction = emotion_ml_service.predict_emotion(input_data.text)
-            if ml_prediction:
-                # Merge or add to emotions dict
-                emotions['detected_mood_ml'] = ml_prediction['emotion']
-                emotions['mood_confidence'] = ml_prediction['confidence']
-        except Exception as ml_e:
-            logger.warning(f"ML Public Model prediction failed: {ml_e}")
+        # CLOUD LITE: ML model disabled (PyTorch not in requirements-lite)
+        # try:
+        #     from backend.services.emotion_ml_service import emotion_ml_service
+        #     ml_prediction = emotion_ml_service.predict_emotion(input_data.text)
+        #     if ml_prediction:
+        #         emotions['detected_mood_ml'] = ml_prediction['emotion']
+        #         emotions['mood_confidence'] = ml_prediction['confidence']
+        # except Exception as ml_e:
+        #     logger.warning(f"ML Public Model prediction failed: {ml_e}")
 
     except Exception as e:
         logger.error(f"Error extracting symptoms: {e}")
@@ -530,47 +529,31 @@ def create_patient(
         logger.error(f"Error registrando paciente: {e}")
         raise HTTPException(status_code=500, detail="Error interno al registrar paciente")
 
-from fastapi import UploadFile, File
-from backend.services.voice_service import voice_service
-
-@app.post("/api/transcribe", tags=["Voice Analysis"])
-async def transcribe_audio_endpoint(file: UploadFile = File(...)):
-    """
-    Recibe un archivo de audio (blob), lo procesa con Whisper y devuelve el texto.
-    """
-    logger.info(f"🎤 Recibiendo audio para transcripción: {file.filename}")
-    
-    try:
-        # Leer contenido del archivo
-        audio_bytes = await file.read()
-        
-        # Guardar temporalmente para que ffmpeg lo lea (whisper carga desde archivo path o numpy array)
-        # Para simplificar y soportar varios formatos (webm, mp3), guardamos a disco temporalmente.
-        temp_filename = f"temp_{uuid.uuid4()}.webm" # Asumimos webm del navegador
-        with open(temp_filename, "wb") as f:
-            f.write(audio_bytes)
-            
-        logger.info(f"  - Guardado temporal en {temp_filename}")
-        
-        # Cargar modelo (si no está)
-        voice_service.load_model()
-        
-        # Transcribir usando la ruta del archivo (Whisper usa ffmpeg internamente para abrirlo)
-        result = voice_service.model.transcribe(temp_filename, language="es")
-        text = result.get("text", "").strip()
-        
-        # Limpieza
-        os.remove(temp_filename)
-        
-        logger.info(f"✅ Transcripción: {text[:50]}...")
-        return {"success": True, "text": text}
-        
-    except Exception as e:
-        logger.error(f"❌ Error en transcripción API: {e}")
-        # Intentar limpiar si falló
-        if 'temp_filename' in locals() and os.path.exists(temp_filename):
-            os.remove(temp_filename)
-        raise HTTPException(status_code=500, detail=f"Error procesando audio: {str(e)}")
+# CLOUD LITE: Voice transcription disabled (Whisper not in requirements-lite)
+# from fastapi import UploadFile, File
+# from backend.services.voice_service import voice_service
+# 
+# @app.post("/api/transcribe", tags=["Voice Analysis"])
+# async def transcribe_audio_endpoint(file: UploadFile = File(...)):
+#     """Recibe un archivo de audio (blob), lo procesa con Whisper y devuelve el texto."""
+#     logger.info(f"🎤 Recibiendo audio para transcripción: {file.filename}")
+#     try:
+#         audio_bytes = await file.read()
+#         temp_filename = f"temp_{uuid.uuid4()}.webm"
+#         with open(temp_filename, "wb") as f:
+#             f.write(audio_bytes)
+#         logger.info(f"  - Guardado temporal en {temp_filename}")
+#         voice_service.load_model()
+#         result = voice_service.model.transcribe(temp_filename, language="es")
+#         text = result.get("text", "").strip()
+#         os.remove(temp_filename)
+#         logger.info(f"✅ Transcripción: {text[:50]}...")
+#         return {"success": True, "text": text}
+#     except Exception as e:
+#         logger.error(f"❌ Error en transcripción API: {e}")
+#         if 'temp_filename' in locals() and os.path.exists(temp_filename):
+#             os.remove(temp_filename)
+#         raise HTTPException(status_code=500, detail=f"Error procesando audio: {str(e)}")
 
 # -----------------------------------------------------------------------------
 # Active Learning Endpoints

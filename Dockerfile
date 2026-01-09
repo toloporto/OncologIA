@@ -22,9 +22,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 
 # 4. Copia y Instalación de Dependencias Python
-# Copiamos primero requirements.txt para aprovechar la caché de capas de Docker
-COPY backend/requirements.txt /app/backend/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /app/backend/requirements.txt
+# Usamos requirements-lite para cloud (sin PyTorch/ML pesado)
+COPY backend/requirements-lite.txt /app/backend/requirements-lite.txt
+RUN pip install --no-cache-dir --upgrade -r /app/backend/requirements-lite.txt
 
 # 5. Copia del Código Fuente del Backend
 # Solo copiamos el backend (los modelos y PDFs están en .gitignore)
