@@ -18,11 +18,12 @@ services:
       - key: PORT
         value: 8000
 
-# 2. Frontend Service (Static Site)
-staticSites:
-  - name: oncologIA-frontend
+  # 2. Frontend Service (Static Site)
+  - type: web
+    name: oncologIA-frontend
+    env: static
     buildCommand: cd frontend && npm install && npm run build
-    publishPath: frontend/dist
+    staticPublishPath: frontend/dist
     branch: main
     repo: https://github.com/toloporto/OncologIA
     envVars:
