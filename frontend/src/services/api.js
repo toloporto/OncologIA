@@ -3,8 +3,12 @@ import axios from 'axios';
 import authService from './authService';
 
 // Interceptar requests para agregar token de autenticación
+const baseURL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+// Ensure protocol is present (Render 'host' property might return just domain)
+const finalBaseURL = baseURL.startsWith('http') ? baseURL : `https://${baseURL}`;
+
 const apiClient = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "http://localhost:8000", // URL de tu backend real
+    baseURL: finalBaseURL,
     headers: {
         'Content-Type': 'application/json',
     },
